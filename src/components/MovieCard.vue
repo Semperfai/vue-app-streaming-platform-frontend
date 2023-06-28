@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { StarIcon } from '@heroicons/vue/24/solid'
-interface MovieFeed {
-  title: string
-  poster: string
-  year: string
-  id: string
-  rate: string
-  link?: string
-}
-
+import { MovieFeed } from '../types'
 defineProps<MovieFeed>()
 </script>
 <template>

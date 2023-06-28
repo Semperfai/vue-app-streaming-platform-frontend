@@ -4,14 +4,6 @@ import { ref, computed } from 'vue'
 import { flashNews } from '../mocks/news'
 import Stack from './Stack.vue'
 
-interface FlashNews {
-  id: number
-  rotate: number
-  image: string
-  text: string
-  date: string
-}
-
 // Slider
 const isBackDirection = ref<boolean>(false)
 const currentSlideIndex = ref<number>(0)
@@ -93,7 +85,7 @@ const toggleLoading = () => {
 .slide-fade-reverse-enter-active,
 .slide-fade-reverse-leave-active,
 .slide-fade-leave-active {
-  transition: all .3s ease;
+  transition: all .5s ease;
 }
 
 .slide-fade-enter {

@@ -1,16 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-interface Banner {
-  title: string
-  plot: string
-  year: string
-  id: string
-  genre: string
-  duration: string
-  poster: string
-}
-
+import { Banner } from '../types'
 const bannerMock: Banner = {
   title: 'Interstellar',
   plot: 'When Earth became uninhabitable in the feature, a farmer and ex-NASA pilot, Joseph Cooper tasks to pilot spacecraft along with a team if researchers, to finde a new planet for humans',
@@ -23,7 +12,7 @@ const bannerMock: Banner = {
 const bg = `url(${bannerMock.poster})`
 </script>
 <template>
-  <div class="banner flex p-8 w-full  rounded-2xl drop-shadow-xl cursor-pointer">
+  <div class="banner flex p-8 w-full rounded-2xl drop-shadow-xl cursor-pointer">
     <div class="text-white self-end">
       <h1 class="text-4xl mb-2 font-bold">{{ bannerMock.title }}</h1>
       <p>{{ bannerMock.plot }}</p>
