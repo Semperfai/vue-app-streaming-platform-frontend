@@ -15,19 +15,19 @@ const onTabChange = (tabId: string) => {
 </script>
 
 <template>
-  <page>
+  <page paddingles>
     <template #title>Home</template>
-    <div>
+    <div class="mx-4">
       <tabs :tabs="tabsMock" :active-tab="activeTab" @on-tab-change="onTabChange"></tabs>
+      <content-row>
+        <main-banner />
+        <div class="w-full ml-10 max-w-md">
+          <flash-news />
+        </div>
+      </content-row>
     </div>
-    <content-row>
-      <main-banner />
-      <div class="w-full ml-10 max-w-md">
-        <flash-news />
-      </div>
-    </content-row>
     <content-row class="flex-col">
-      <h1 class="text-2xl text-white font-bold">Special for you</h1>
+      <h1 class="mx-4 text-2xl text-white font-bold">Special for you</h1>
       <movie-feed></movie-feed>
     </content-row>
   </page>

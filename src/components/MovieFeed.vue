@@ -14,4 +14,8 @@ import MovieCard from './MovieCard.vue'
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.carousel__viewport {
+  @apply pl-4;
+}
+</style>
