@@ -18,6 +18,7 @@ const progress = () => {
 
 const onTimeChange = (value: number) => {
   video.value.currentTime = value
+  progress()
 }
 </script>
 <template>
@@ -32,6 +33,7 @@ const onTimeChange = (value: number) => {
       controls
       @loadedmetadata="setVideoData"
       @progress="progress"
+      @timeupdate="progress"
     />
     <time-control
       :video-duratiion="videoDuratiion"
@@ -50,7 +52,7 @@ const onTimeChange = (value: number) => {
   @apply aspect-video shadow-sm block w-full h-full cursor-pointer bg-movie-black;
 }
 
-/* ::-webkit-media-controls {
+::-webkit-media-controls {
   display: none;
-} */
+}
 </style>

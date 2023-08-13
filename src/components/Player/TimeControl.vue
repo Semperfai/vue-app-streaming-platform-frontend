@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { calculateTime } from '../../lib/helpers/calculateTime.ts'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 const props = defineProps<{
   isActive: boolean
   videoDuratiion: number
@@ -17,29 +18,75 @@ const updateTimeBar = (event: Event) => {
   emits('on-time-change', timeBar.value)
 }
 
-const skip = () => {}
+const currentTime = computed(() => calculateTime(props.currentVideoPosition))
+const timeTotal = computed(() => calculateTime(props.videoDuratiion))
 
-onMounted(() => {
-  window.addEventListener('keydown', skip)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', skip)
+const range = computed(() => {
+  const percent = ((props.currentVideoPosition / props.videoDuratiion) * 100).toFixed(2)
+  return `${percent}% 100%`
 })
 </script>
 <template>
-  <div class="controls" v-bind="$attrs">
-    <time>00:00</time>
+  <div
+    class="controls"
+    v-bind="$attrs"
+    :class="{
+      active: isActive
+    }"
+  >
+    <time class="text-white mr-4">{{ currentTime }}</time>
     <input
       type="range"
       class="time-track"
+      step="1"
       :min="0"
       :max="videoDuratiion"
       :value="currentVideoPosition"
       @change="updateTimeBar"
     />
-    <time>00:00</time>
+    <time class="text-white ml-4">{{ timeTotal }}</time>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.time-track {
+  @apply outline-none rounded-lg self-center opacity-70 cursor-pointer h-[8px] w-full;
+  background-image: linear-gradient(#f37515, #f37515);
+  background-repeat: no-repeat;
+  background-size: v-bind(range);
+  background-color: 10%;
+  -webkit-appearance: none;
+}
+
+.time-track::-webkit-slider-thumb {
+  @apply h-[18px] w-[18px] self-center bg-oranje rounded-lg cursor-pointer outline-none;
+  -webkit-appearance: none;
+}
+
+.time-track::-moz-range-thumb {
+  @apply h-[18px] w-[18px] self-center bg-oranje rounded-lg cursor-pointer outline-none;
+  -webkit-appearance: none;
+}
+
+.controls {
+  @apply px-8 w-full flex opacity-0 invisible m-0;
+  transition: 0.5s;
+  transition-property: opacity, visibility;
+  transform: translateY(-50px);
+}
+
+.controls.active {
+  @apply opacity-100 visible;
+}
+
+.controls * {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+@media (hover: hover) {
+  .controls *:hover {
+    opacity: 0.7;
+  }
+}
+</style>
