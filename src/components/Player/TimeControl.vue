@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { calculateTime } from '../../lib/helpers/calculateTime.ts'
+import { calculateTime } from '../../lib/helpers/calculateTime'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 const props = defineProps<{
   isActive: boolean
